@@ -1,0 +1,15 @@
+---
+- hosts: all
+  remote_user: root
+
+  tasks:
+    - name: install stuff
+      apt: name={{item}} state=present update_cache=yes
+      with_items:
+        - snmpd
+    - name: copy config
+      copy: src=files/snmpd.debian.conf dest=/etc/snmp/snmpd.conf
+
+    - name: enable and start service
+      service: name=snmpd state=started enabled=yes
+
