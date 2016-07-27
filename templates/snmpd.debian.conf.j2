@@ -7,7 +7,8 @@ com2sec monitoring_sec  {{ h }}   public
 group monitoring_group  v1  monitoring_sec
 group monitoring_group  v2c monitoring_sec
 
-view anything_view   included    .1
+view anything_view   included    .1.3.6.1.4.1.2021
+view anything_view   included    .1.3.6.1.2.1
 
 access monitoring_group ""  any noauth  exact   anything_view   none    none
 
