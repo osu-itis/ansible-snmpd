@@ -1,20 +1,27 @@
 ---
 - hosts: all
   remote_user: root
+  vars_files:
+    - monitors.yml
 
   tasks:
     - name: install stuff
       apt: name={{item}} state=present update_cache=yes
       with_items:
         - snmpd
+
     - name: copy config
-      copy: src=files/snmpd.debian.conf dest=/etc/snmp/snmpd.conf
+      template:
+        src=templates/snmpd.debian.conf.j2
+        dest=/etc/snmp/snmpd.conf
+        owner=root
+        group=root
+        mode=0600
 
     - name: enable and start service
       service: name=snmpd state=started enabled=yes
 
     - name: open firewall
-      ufw: rule=allow proto=udp insert=1 src=128.193.14.4 port=161
+      ufw: rule=allow proto=udp insert=1 src={{item}} port=161
+      with_items: {{monitors}}
 
-    - name: open firewall again
-      ufw: rule=allow proto=udp insert=1 src=128.193.15.24 port=161

@@ -1,7 +1,8 @@
 agentAddress udp:161,udp6:[::1]:161
 
-com2sec monitoring_sec  128.193.15.29   public
-com2sec monitoring_sec  128.193.14.4    public
+{% for h in monitors %}
+com2sec monitoring_sec  {{ h }}   public
+{% endfor %}
 
 group monitoring_group  v1  monitoring_sec
 group monitoring_group  v2c monitoring_sec
