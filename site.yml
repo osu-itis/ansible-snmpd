@@ -19,7 +19,7 @@
         mode=0600
 
     - name: enable and start service
-      service: name=snmpd state=started enabled=yes
+      service: name=snmpd state=restarted enabled=yes
 
     - name: open firewall
       ufw: rule=allow proto=udp insert=1 src={{item}} port=161
