@@ -23,5 +23,5 @@
 
     - name: open firewall
       ufw: rule=allow proto=udp insert=1 src={{item}} port=161
-      with_items: {{monitors}}
+      with_items: "{{monitors}}"
 
