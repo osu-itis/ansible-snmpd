@@ -1,6 +1,6 @@
 agentAddress udp:161,udp6:[::1]:161
 
-{% for h in monitors %}
+{% for h in snmpd.monitors %}
 com2sec monitoring_sec  {{ h }}   public
 {% endfor %}
 
@@ -16,3 +16,6 @@ sysLocation    OSU-IS
 sysContact     root@oregonstate.edu
 sysServices    72
 
+{% for c in snmpd.custom %}
+c
+{% endfor %}
