@@ -16,6 +16,8 @@ sysLocation    OSU-IS
 sysContact     root@oregonstate.edu
 sysServices    72
 
+master agentx
+
 {% for c in snmpd.custom %}
 {{ c }}
 {% endfor %}
